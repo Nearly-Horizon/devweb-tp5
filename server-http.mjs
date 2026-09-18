@@ -5,7 +5,7 @@ const port = 8000;
 
 function requestListener(_request, response) {
   response.writeHead(200);
-  response.end("<html><h1>My first server!<h1></html>");
+  response.end("<html><h1>Hello world!<h1></html>");
 }
 
 const server = http.createServer(requestListener);
