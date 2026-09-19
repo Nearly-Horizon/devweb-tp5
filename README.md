@@ -165,3 +165,97 @@ Après ajout de la route /random/:nb avec split("/") et fall-through
 sur "" et "index.html", les routes / et /index.html renvoient tous
 deux 200 avec le contenu de index.html, et /random/n renvoie n nombres
 aléatoires (400 si n n'est pas un entier).
+
+=================================
+Question 2.1 :
+=================================
+# URLs des documentations
+express : https://expressjs.com/
+http-errors : https://github.com/jshttp/http-errors
+loglevel : https://github.com/pimterry/loglevel
+morgan : https://github.com/expressjs/morgan
+
+# creation des scripts express-dev et express-prod
+express-dev": "cross-env NODE_ENV=development nodemon server-express.mjs
+express-prod": "cross-env NODE_ENV=production node server-express.mjs
+
+=================================
+Question 2.2 :
+=================================
+# Vérification des 3 routes :
+## Request URL http://localhost:8000/
+Request method
+GET
+Status code
+200 OK
+Remote address
+[::1]:8000
+Referrer policy
+no-referrer
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Fri, 18 Sep 2026 23:53:26 GMT
+ETag: W/"3ac-1a0b6f0725b"
+Content-Type: text/html; charset=utf-8
+Content-Length: 940
+Date: Sat, 19 Sep 2026 00:29:35 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+## Request URL http://localhost:8000/index.html
+Request method
+GET
+Status code
+200 OK
+Remote address
+[::1]:8000
+Referrer policy
+no-referrer
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Fri, 18 Sep 2026 23:53:26 GMT
+ETag: W/"3ac-1a0b6f0725b"
+Content-Type: text/html; charset=utf-8
+Content-Length: 940
+Date: Sat, 19 Sep 2026 00:30:21 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+## Request URL http://localhost:8000/random/5
+Request method
+GET
+Status code
+200 OK
+Remote address
+[::1]:8000
+Referrer policy
+no-referrer
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 81
+ETag: W/"51-gKsBcyMZZjJX6YOit+hTEKc7Aaw"
+Date: Sat, 19 Sep 2026 00:28:18 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+=================================
+Question 2.3 :
+=================================
+# Nouveaux par rapport au serveur HTTP natif :
+X-Powered-By: Express (signature du framework)
+ETag (pour le cache)
+Content-Type avec charset=utf-8 (Express précise l'encodage)
+
+=================================
+Question 2.4 :
+=================================
+L'événement listening est déclenché quand le serveur a terminé de se lier au port et à l'hôte (après server.listen()), c'est-à-dire au moment où il commence à accepter des connexions. Il est asynchrone : le code situé après server.on("listening", ...) (comme console.info("File ... executed.")) s'exécute avant que le callback ne soit appelé.
+
+=================================
+Question 2.5 :
+=================================
