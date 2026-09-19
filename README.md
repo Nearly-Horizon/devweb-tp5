@@ -104,3 +104,64 @@ Outil = node ( pas de rechargement automatique de la page web)
 Usage = Production web
 
 node lance juste le script une fois --> plus performant en prod
+
+=================================
+Question 1.8 :
+=================================
+# Code HTTP
+URL : http://localhost:8000/index.html
+Code HTTP : 200
+URL : http://localhost:8000/random.html
+Code HTTP : 200
+URL : http://localhost:8000/
+Code HTTP : 404
+URL : http://localhost:8000/dont-exist
+Code HTTP : 404
+
+# requestListener async/await modifié
+async function requestListener(request, response) {
+  response.setHeader("Content-Type", "text/html");
+  try {
+    const contents = await fs.readFile("index.html", "utf8");
+    const urlParts = request.url.split("/"); // ["", "random", "5"]
+
+    switch (urlParts[1]) {
+      case "":
+      case "index.html":
+        response.writeHead(200);
+        return response.end(contents);
+
+      case "random.html":
+        response.writeHead(200);
+        return response.end(
+          `<html><p>${Math.floor(100 * Math.random())}</p></html>`,
+        );
+
+      case "random": {
+        const nb = Number.parseInt(urlParts[2], 10);
+        if (Number.isNaN(nb)) {
+          response.writeHead(400);
+          return response.end("<html><p>400: BAD REQUEST</p></html>");
+        }
+        const numbers = Array.from({ length: nb })
+          .map(() => Math.floor(100 * Math.random()))
+          .join("</li><li>");
+        response.writeHead(200);
+        return response.end(`<html><ul><li>${numbers}</li></ul></html>`);
+      }
+
+      default:
+        response.writeHead(404);
+        return response.end("<html><p>404: NOT FOUND</p></html>");
+    }
+  } catch (error) {
+    console.error(error);
+    response.writeHead(500);
+    return response.end("<html><p>500: INTERNAL SERVER ERROR</p></html>");
+  }
+}
+
+Après ajout de la route /random/:nb avec split("/") et fall-through
+sur "" et "index.html", les routes / et /index.html renvoient tous
+deux 200 avec le contenu de index.html, et /random/n renvoie n nombres
+aléatoires (400 si n n'est pas un entier).
