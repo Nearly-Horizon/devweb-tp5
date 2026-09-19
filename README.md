@@ -80,3 +80,27 @@ async function requestListener(_request, response) {
     return response.end("<html><p>500: INTERNAL SERVER ERROR</p></html>");
   }
 }
+
+=================================
+Question 1.6 :
+=================================
+### npm install cross-env --save : a ajouté "cross-env" dans "dependencies" et créé le dossier node_modules/ + package-lock.json
+
+### npm install nodemon --save-dev : a ajouté "nodemon" dans "devDependencies"
+
+=================================
+Question 1.7 :
+=================================
+# http-dev
+Variable = NODE_ENV=development
+Outil = nodemon (rechargement automatique de la page web)
+Usage = Développement web
+
+nodemon surveille les fichiers et redémarre automatiquement --> pratique en dev
+
+# http-prod
+Variable = NODE_ENV=production
+Outil = node ( pas de rechargement automatique de la page web)
+Usage = Production web
+
+node lance juste le script une fois --> plus performant en prod
