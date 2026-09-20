@@ -272,4 +272,8 @@ Ctrl+Shift+R :	200 OK
 Justification :
 - Express ajoute un ETag (empreinte du fichier) et Cache-Control
 - Au Ctrl+R, le navigateur envoie If-None-Match: <etag> : si l'ETag est identique, le serveur répond 304 --> pas de corps, juste l'utilisation de la version en cache
-- Au Ctrl+Shift+R, le navigateur vide le cache et redemande le fichier entier → 200
+- Au Ctrl+Shift+R, le navigateur vide le cache et redemande le fichier entier --> 200
+
+=================================
+Question 2.7 :
+=================================
