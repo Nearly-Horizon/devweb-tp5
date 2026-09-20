@@ -277,3 +277,15 @@ Justification :
 =================================
 Question 2.7 :
 =================================
+# Différence d'affichage dev vs prod
+## En development (npm run express-dev), la page d'erreur affiche :
+- Le code (ex: 404)
+- Le message (Not Found)
+- La stack trace complète (<pre>... avec les fichiers et lignes)
+
+## En production (npm run express-prod), la stack trace est vide :
+- Seuls le code et le message apparaissent
+- Pas de détails internes (sécurité : on ne révèle pas la structure du code)
+
+# const stack = app.get("env") === "development" ? error.stack : "";
+--> app.get("env") lit NODE_ENV. Le stack n'est inclus qu'en dev.
