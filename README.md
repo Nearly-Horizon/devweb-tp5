@@ -259,3 +259,17 @@ L'événement listening est déclenché quand le serveur a terminé de se lier a
 =================================
 Question 2.5 :
 =================================
+L'option index du middleware express.static, activée par défaut avec la valeur "index.html".
+
+=================================
+Question 2.6 :
+=================================
+# Codes HTTP sur style.css
+Premier chargement :	200 OK
+Ctrl+R :	304 Not Modified
+Ctrl+Shift+R :	200 OK
+
+Justification :
+- Express ajoute un ETag (empreinte du fichier) et Cache-Control
+- Au Ctrl+R, le navigateur envoie If-None-Match: <etag> : si l'ETag est identique, le serveur répond 304 --> pas de corps, juste l'utilisation de la version en cache
+- Au Ctrl+Shift+R, le navigateur vide le cache et redemande le fichier entier → 200
